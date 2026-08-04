@@ -1,0 +1,18 @@
+interface:
+  display_name: "Klaviyo Agent Audit"
+  short_description: "Evidence-based Klaviyo audits through the official MCP"
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/icon-large.svg"
+  brand_color: "#FF6B5E"
+  default_prompt: "Use $klaviyo-agent-audit to run a read-only audit of my connected Klaviyo account."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "klaviyo"
+      description: "Official Klaviyo MCP server configured in read-only mode"
+      transport: "streamable_http"
+      url: "https://mcp.klaviyo.com/mcp?read-only=true&core-tools-only=false"
+
+policy:
+  allow_implicit_invocation: true

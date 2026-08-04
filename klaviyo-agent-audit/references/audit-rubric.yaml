@@ -1,0 +1,66 @@
+version: "1.0.0"
+total_points: 100
+status_defaults:
+  pass: 1.0
+  partial: 0.5
+  fail: 0.0
+  unverifiable: null
+dimensions:
+  - id: flows_lifecycle
+    label: "Flows and lifecycle coverage"
+    points: 25
+    checks:
+      - { id: "flows.applicable_coverage", points: 6 }
+      - { id: "flows.trigger_filters_exits", points: 5 }
+      - { id: "flows.sequence_timing_overlap", points: 4 }
+      - { id: "flows.performance_by_message", points: 5 }
+      - { id: "flows.consent_tracking_testing", points: 5 }
+  - id: data_measurement
+    label: "Data and measurement"
+    points: 15
+    checks:
+      - { id: "data.primary_conversion_metric", points: 4 }
+      - { id: "data.event_continuity", points: 4 }
+      - { id: "data.attribution_semantics", points: 3 }
+      - { id: "data.tracking_integrations", points: 4 }
+  - id: deliverability_consent
+    label: "Deliverability and consent"
+    points: 15
+    checks:
+      - { id: "deliverability.bounce_complaint_trend", points: 5 }
+      - { id: "deliverability.unsubscribe_engagement", points: 4 }
+      - { id: "deliverability.authentication_sender", points: 3 }
+      - { id: "deliverability.consent_suppression", points: 3 }
+  - id: campaign_program
+    label: "Campaign program"
+    points: 15
+    checks:
+      - { id: "campaigns.cadence_consistency", points: 3 }
+      - { id: "campaigns.audience_exclusions", points: 4 }
+      - { id: "campaigns.performance_trend", points: 4 }
+      - { id: "campaigns.testing_tracking", points: 4 }
+  - id: audience_segmentation
+    label: "Audience and segmentation"
+    points: 10
+    checks:
+      - { id: "audience.lifecycle_segments", points: 3 }
+      - { id: "audience.engagement_suppression", points: 3 }
+      - { id: "audience.segment_health_usage", points: 2 }
+      - { id: "audience.list_governance", points: 2 }
+  - id: forms_acquisition
+    label: "Forms and acquisition"
+    points: 10
+    checks:
+      - { id: "forms.active_coverage", points: 2 }
+      - { id: "forms.performance_trend", points: 3 }
+      - { id: "forms.targeting_frequency", points: 2 }
+      - { id: "forms.consent_handoff", points: 3 }
+  - id: content_experimentation
+    label: "Content and experimentation"
+    points: 10
+    checks:
+      - { id: "content.message_hierarchy", points: 2 }
+      - { id: "content.subject_preview_alignment", points: 2 }
+      - { id: "content.mobile_accessibility", points: 2 }
+      - { id: "content.experiment_design", points: 2 }
+      - { id: "content.tracking_localization", points: 2 }

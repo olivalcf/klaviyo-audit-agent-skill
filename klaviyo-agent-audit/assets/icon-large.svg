@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Klaviyo Agent Audit">
+  <rect width="640" height="360" rx="36" fill="#FFF8EC"/>
+  <rect x="56" y="54" width="528" height="252" rx="24" fill="#1E2A24"/>
+  <path d="M104 104h258v24H104zm0 50h172v24H104zm0 50h216v24H104z" fill="#FFF8EC"/>
+  <circle cx="480" cy="192" r="62" fill="#FF6B5E"/>
+  <path d="m450 192 20 20 42-49" fill="none" stroke="#FFF8EC" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="104" y="276" fill="#C9F27B" font-family="system-ui, sans-serif" font-size="24" font-weight="700">READ-ONLY • EVIDENCE-BASED</text>
+</svg>
