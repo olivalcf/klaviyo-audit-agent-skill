@@ -81,10 +81,10 @@ Read [references/audit-data-requirements.md](references/audit-data-requirements.
 Use the 100-point rubric in [references/audit-rubric.yaml](references/audit-rubric.yaml) and the reproducible status rules in [references/check-criteria.md](references/check-criteria.md). For Quick and Full audits, include every rubric check, using `unverifiable` where evidence is unavailable. Evaluate each check with:
 
 ```yaml
-check_id: flows.welcome_live
+check_id: flows.applicable_coverage
 dimension: flows_lifecycle
 status: pass | partial | fail | unverifiable
-points: 4
+points: 6
 score: 0.0 to 1.0
 evidence: concise observation with numerator, denominator, and period when relevant
 source: MCP capability and returned object/report
