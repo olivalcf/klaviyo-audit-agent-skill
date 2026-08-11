@@ -12,6 +12,31 @@ The skill reviews flows, measurement, deliverability, campaigns, audiences, form
 > [!IMPORTANT]
 > The Klaviyo connection lives inside your AI agent. This repository and the SPARKCRM website do not proxy the connection, authenticate your Klaviyo account, or receive your Klaviyo data.
 
+## One-prompt setup
+
+Want your agent to handle the installation and connection steps? Copy and paste this prompt into any MCP-capable AI agent:
+
+```text
+Install the Klaviyo Agent Audit skill from https://github.com/olivalcf/klaviyo-agent-skill and help me connect it to Klaviyo's official MCP.
+
+First, identify which AI agent or client I am using and follow its supported Skill and MCP installation method. If you cannot install either directly, give me the exact steps and commands, then stop whenever I must approve OAuth or restart the client.
+
+For the MCP connection:
+- Ask me for the Klaviyo account name and create a unique connector name such as klaviyo-<account-slug>.
+- Use this remote server URL: https://mcp.klaviyo.com/mcp?company=<account-slug>&read-only=true&disable-tools-with-user-generated-content=true&core-tools-only=false
+- Use OAuth when supported. Never ask me to paste a Klaviyo API key or authorization callback URL into chat.
+- Keep the connection read-only. Never create, update, delete, send, schedule, subscribe, suppress, or import anything.
+
+After installation or restart:
+1. Use only the newly named Klaviyo connector.
+2. Call get_account_details and ask me to confirm the account name before reading anything else.
+3. Do not access individual profiles or personal data for the standard audit.
+4. Invoke klaviyo-agent-audit (or $klaviyo-agent-audit where supported) in Quick mode for the last 30 complete days.
+5. Report maturity, coverage, confidence, evidence gaps, and a Now / Next / Later action plan.
+```
+
+The agent should pause whenever you need to approve OAuth or restart the client. The initial connection profile disables write tools and user-generated-content tools; you can enable content reads later for a Full content audit.
+
 ## Why this exists
 
 Most Klaviyo audit prompts mix three different questions: what exists, whether it is configured well, and whether it performs. They also tend to produce precise scores when the agent could only inspect part of the account.
