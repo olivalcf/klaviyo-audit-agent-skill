@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict'
 import { execFileSync, spawnSync } from 'node:child_process'
-import { existsSync, readFileSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
 
@@ -58,10 +59,17 @@ test('validator rejects personal-data fields', () => {
     ...JSON.parse(readFileSync(fixturePath, 'utf8')),
     email_address: 'do-not-store@example.invalid',
   })
-  const result = spawnSync('node', [
-    resolve(root, 'klaviyo-agent-audit/scripts/validate-audit.mjs'),
-    '/dev/stdin',
-  ], { input: unsafe, encoding: 'utf8' })
-  assert.notEqual(result.status, 0)
-  assert.match(result.stderr, /personal-data field not allowed/)
+  const directory = mkdtempSync(join(tmpdir(), 'klaviyo-agent-skill-test-'))
+  const unsafeFixture = join(directory, 'unsafe-audit.json')
+  try {
+    writeFileSync(unsafeFixture, unsafe)
+    const result = spawnSync('node', [
+      resolve(root, 'klaviyo-agent-audit/scripts/validate-audit.mjs'),
+      unsafeFixture,
+    ], { encoding: 'utf8' })
+    assert.notEqual(result.status, 0)
+    assert.match(result.stderr, /personal-data field not allowed/)
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
+  }
 })

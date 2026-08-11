@@ -7,6 +7,13 @@ All notable changes to this project are documented here. The project follows [Se
 - Cross-client end-to-end validation for Claude Code and GitHub Copilot CLI.
 - Additional ecommerce and B2B audit fixtures.
 
+## [0.2.1] - 2026-08-11
+
+### Fixed
+
+- Made the personal-data rejection test portable across macOS and Linux runners.
+- Updated GitHub Actions to current Node runtimes and added Node.js 20/24 coverage.
+
 ## [0.2.0] - 2026-08-11
 
 ### Added
@@ -30,6 +37,7 @@ All notable changes to this project are documented here. The project follows [Se
 - 100-point rubric with 30 checks across seven dimensions.
 - Audit validator, scorer, report template, MCP routing, benchmark policy, reporting semantics, lifecycle playbooks, and prompt-injection controls.
 
-[Unreleased]: https://github.com/olivalcf/klaviyo-agent-skill/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/olivalcf/klaviyo-agent-skill/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/olivalcf/klaviyo-agent-skill/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/olivalcf/klaviyo-agent-skill/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/olivalcf/klaviyo-agent-skill/releases/tag/v0.1.0
