@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Klaviyo MCP documentation
+    url: https://developers.klaviyo.com/en/docs/klaviyo_mcp_server
+    about: Use Klaviyo's official documentation for connector setup and platform behavior.
+  - name: Security report
+    url: https://github.com/olivalcf/klaviyo-agent-skill/security/advisories/new
+    about: Report credential exposure, unsafe mutations, prompt-injection bypasses, or personal-data leakage privately.

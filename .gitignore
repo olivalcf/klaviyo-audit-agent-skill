@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+audit.json
+audit-output.json
+*.log

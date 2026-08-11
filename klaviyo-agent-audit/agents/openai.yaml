@@ -12,7 +12,7 @@ dependencies:
       value: "klaviyo"
       description: "Official Klaviyo MCP server configured in read-only mode"
       transport: "streamable_http"
-      url: "https://mcp.klaviyo.com/mcp?read-only=true&core-tools-only=false"
+      url: "https://mcp.klaviyo.com/mcp?read-only=true&disable-tools-with-user-generated-content=true&core-tools-only=false"
 
 policy:
   allow_implicit_invocation: true

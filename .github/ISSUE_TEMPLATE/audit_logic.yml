@@ -1,0 +1,37 @@
+name: Audit-logic proposal
+description: Propose or challenge a rubric check, evidence rule, weight, or benchmark policy.
+title: "[Audit logic]: "
+labels: [methodology]
+body:
+  - type: input
+    id: check
+    attributes:
+      label: Check or dimension
+      placeholder: flows.sequence_timing_overlap
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: Current problem
+    validations:
+      required: true
+  - type: textarea
+    id: observable
+    attributes:
+      label: Observable read-only evidence
+      description: Specify source, denominator, window, and low-volume behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: statuses
+    attributes:
+      label: Proposed status rules
+      description: Define pass, partial, fail, and unverifiable behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: First-party sources
+      description: Add dated official links if the proposal relies on changing vendor guidance.

@@ -1,0 +1,63 @@
+name: Bug report
+description: Report reproducible skill, validation, scoring, or MCP-routing behavior.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, OAuth tokens, profile data, recipients, or identifiable account exports.
+  - type: input
+    id: version
+    attributes:
+      label: Skill version or commit
+      placeholder: v0.2.0 or commit SHA
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Agent and version
+      placeholder: Codex, Claude Code, GitHub Copilot CLI, etc.
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Klaviyo MCP connection
+      options:
+        - Listed connector
+        - Custom remote MCP
+        - Local MCP
+        - Unknown
+    validations:
+      required: true
+  - type: textarea
+    id: capabilities
+    attributes:
+      label: Read capabilities visible to the agent
+      description: Tool capability names only; sanitize all account data.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and sanitized error
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, personal data, and identifiable account exports.
+          required: true

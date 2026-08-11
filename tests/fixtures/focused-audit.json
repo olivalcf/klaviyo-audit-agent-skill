@@ -1,0 +1,28 @@
+{
+  "account": {
+    "organization": "Fixture Store"
+  },
+  "scope": {
+    "mode": "focused",
+    "focus_dimensions": ["data_measurement"],
+    "start": "2026-07-01T00:00:00Z",
+    "end": "2026-07-31T00:00:00Z",
+    "timezone": "UTC"
+  },
+  "checks": [
+    {
+      "check_id": "data.primary_conversion_metric",
+      "dimension": "data_measurement",
+      "status": "pass",
+      "points": 4,
+      "score": 1,
+      "evidence": "A mapped business conversion was explicitly selected for the fixture period.",
+      "source": "fixture mapped metrics",
+      "observed_at": "2026-08-01T12:00:00Z",
+      "confidence": "high",
+      "impact": "Performance analysis has an authoritative outcome.",
+      "action": "Keep the mapping documented and monitor continuity.",
+      "effort": "low"
+    }
+  ]
+}

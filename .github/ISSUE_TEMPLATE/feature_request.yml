@@ -1,0 +1,39 @@
+name: Feature request
+description: Propose a capability, compatibility target, playbook, or report improvement.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Describe the audit decision or operator workflow that is currently unsupported.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Safe evidence available through Klaviyo MCP
+      description: Identify read capabilities and required denominators without including account data.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed behavior
+      description: Include expected pass, partial, fail, and unverifiable handling where relevant.
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Area
+      options:
+        - Audit methodology
+        - MCP routing
+        - Compatibility
+        - Reporting
+        - Privacy and security
+        - Tooling and tests
+    validations:
+      required: true

@@ -1,0 +1,13 @@
+{
+  "name": "klaviyo-agent-skill",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Validation tooling for the Klaviyo Agent Audit skill",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
