@@ -19,6 +19,36 @@ Tool names differ between Codex, Claude, other agents, and named account connect
 
 Use the tool schema exposed by the current client. Never invent parameters from this table.
 
+## Distinguish connection surfaces
+
+Some clients can expose the official Klaviyo MCP through more than one independent surface:
+
+- an installed app, plugin, or listed connector whose OAuth account binding is managed in the client's settings;
+- a custom remote MCP configured through a CLI or configuration file, often with a user-defined connector name and filtered URL.
+
+Determine which surface owns the tools visible to the current task. A generic tool prefix can still be bound to one specific Klaviyo organization, while a named custom server can be configured correctly but absent from the task's loaded tool catalog. Configuration readback proves only that a connection is saved; it does not prove the task can call it or that a separate app/plugin uses the same account.
+
+For Codex specifically, `codex mcp list` describes custom MCP servers. It does not change the OAuth account used by a separately installed ChatGPT/Codex Klaviyo app or plugin. If the task exposes an app/plugin namespace while the intended custom server is missing, repeatedly restarting the custom server will not rebind the plugin.
+
+Before any deeper read:
+
+1. identify the tool provider or connector that will be used;
+2. call only its account-details capability;
+3. compare the returned organization with the user's requested account;
+4. stop on a mismatch instead of falling back to another Klaviyo connection.
+
+After installing or reauthorizing a connection, a fresh task or client session may be required to rebuild the tool catalog. If reloading does not change the visible provider, inspect and reconnect the surface that actually supplies the tools. Disconnect or replace an existing account binding only with the user's authorization.
+
+### Codex OAuth troubleshooting for filtered custom URLs
+
+If `codex mcp login` reports `Protected resource metadata resource mismatch` for a URL with query parameters, check the current status of [openai/codex#37387](https://github.com/openai/codex/issues/37387). While that issue remains applicable, authenticate with a one-time base-resource override while preserving the filtered, read-only URL in persistent configuration:
+
+```bash
+codex mcp -c 'mcp_servers.<connector>.url="https://mcp.klaviyo.com"' login <connector>
+```
+
+This workaround addresses custom CLI MCP authentication only. It does not install, remove, or rebind a client app/plugin.
+
 ## Always forbidden during an audit
 
 Do not call tools whose name or description includes a mutation such as:

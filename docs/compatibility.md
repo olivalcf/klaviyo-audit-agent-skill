@@ -6,7 +6,7 @@ This project uses the open, filesystem-based Agent Skills format: a folder conta
 
 | Client | Skill support | Klaviyo MCP path | Project status |
 | --- | --- | --- | --- |
-| Codex | Native Agent Skills | Official remote MCP connector | **Live-tested** |
+| Codex | Native Agent Skills | Installed Klaviyo app/plugin or custom remote MCP; verify the loaded surface | **Live-tested** |
 | Claude Code | Native custom Skills | Listed Klaviyo connector or custom remote MCP | Format-reviewed; end-to-end test pending |
 | GitHub Copilot CLI | Native Agent Skills | Custom MCP server | Format-reviewed; end-to-end test pending |
 | Claude.ai | Custom Skill upload on eligible plans | Listed Klaviyo connector | Not yet certified |
@@ -28,6 +28,10 @@ The portable contract is:
 - the official Klaviyo MCP is installed separately in the client.
 
 The optional `agents/openai.yaml` file improves presentation and dependency metadata in OpenAI clients. Other clients can ignore it.
+
+## Multiple connection surfaces
+
+A listed app/plugin and a custom remote MCP are separate OAuth and tool-loading surfaces. Saving a custom MCP does not rebind an installed plugin, and seeing a connector in client configuration does not prove the current task loaded its tools. The portable verification sequence is therefore provider discovery, `get_account_details`, organization confirmation, then deeper audit reads. Use a fresh task or session after connection changes when the client does not hot-reload tools.
 
 ## Installation locations
 

@@ -7,6 +7,11 @@ All notable changes to this project are documented here. The project follows [Se
 - Cross-client end-to-end validation for Claude Code and GitHub Copilot CLI.
 - Additional ecommerce and B2B audit fixtures.
 
+### Fixed
+
+- Distinguished installed Klaviyo apps/plugins from custom CLI MCP servers during setup and preflight.
+- Added wrong-account and stale-tool-catalog recovery guidance before audit data collection.
+
 ## [0.2.1] - 2026-08-11
 
 ### Fixed

@@ -22,20 +22,23 @@ Install the Klaviyo Agent Audit skill from https://github.com/olivalcf/klaviyo-a
 First, identify which AI agent or client I am using and follow its supported Skill and MCP installation method. If you cannot install either directly, give me the exact steps and commands, then stop whenever I must approve OAuth or restart the client.
 
 For the MCP connection:
-- Ask me for the Klaviyo account name and create a unique connector name such as klaviyo-<account-slug>.
-- Use this remote server URL: https://mcp.klaviyo.com/mcp?company=<account-slug>&read-only=true&disable-tools-with-user-generated-content=true&core-tools-only=false
+- First determine whether this client supplies Klaviyo through an installed app/plugin, a custom remote MCP, or both. Treat those as independent connections and use only one surface for this audit.
+- If the client has an official Klaviyo app/plugin, use its supported install and OAuth flow. Do not assume a CLI-configured MCP changes that plugin's account.
+- Otherwise, ask me for the Klaviyo account name, create a unique custom connector name such as klaviyo-<account-slug>, and use this URL: https://mcp.klaviyo.com/mcp?company=<account-slug>&read-only=true&disable-tools-with-user-generated-content=true&core-tools-only=false
 - Use OAuth when supported. Never ask me to paste a Klaviyo API key or authorization callback URL into chat.
-- Keep the connection read-only. Never create, update, delete, send, schedule, subscribe, suppress, or import anything.
+- Keep the audit read-only. Use server-side read-only filtering when the connection surface supports it, and never create, update, delete, send, schedule, subscribe, suppress, or import anything.
 
 After installation or restart:
-1. Use only the newly named Klaviyo connector.
-2. Call get_account_details and ask me to confirm the account name before reading anything else.
-3. Do not access individual profiles or personal data for the standard audit.
-4. Invoke klaviyo-agent-audit (or $klaviyo-agent-audit where supported) in Quick mode for the last 30 complete days.
-5. Report maturity, coverage, confidence, evidence gaps, and a Now / Next / Later action plan.
+1. Identify the exact app/plugin or custom connector that supplies the visible Klaviyo tools.
+2. Call only get_account_details and ask me to confirm the account name before reading anything else.
+3. If it returns another organization, stop. Do not fall back to a different Klaviyo connection or repeat restarts without checking which connection surface the task loaded.
+4. If a newly connected surface is missing from the tool catalog, follow the client's supported fresh-task or reload flow.
+5. Do not access individual profiles or personal data for the standard audit.
+6. Invoke klaviyo-agent-audit (or $klaviyo-agent-audit where supported) in Quick mode for the last 30 complete days.
+7. Report maturity, coverage, confidence, evidence gaps, and a Now / Next / Later action plan.
 ```
 
-The agent should pause whenever you need to approve OAuth or restart the client. The initial connection profile disables write tools and user-generated-content tools; you can enable content reads later for a Full content audit.
+The agent should pause whenever you need to approve OAuth, replace an existing account binding, or restart the client. A custom connection using the URL above disables write tools and user-generated-content tools; a listed app/plugin may expose a broader catalog, so the skill still verifies every call is read-only. You can enable content reads later for a Full content audit.
 
 ## Why this exists
 
@@ -92,6 +95,13 @@ No SPARKCRM account, Klaviyo private API key, browser extension, upload, or sepa
 ### 1. Connect the official Klaviyo MCP
 
 Follow [Klaviyo's official MCP setup guide](https://developers.klaviyo.com/en/docs/klaviyo_mcp_server). The remote server uses OAuth and is the recommended connection method.
+
+First identify the connection surface supported by your client:
+
+- **Installed app/plugin or listed connector:** connect and select the Klaviyo organization through the client's settings. Its OAuth binding is separate from custom servers configured through a CLI.
+- **Custom remote MCP:** create a named connector and use one of the filtered URLs below.
+
+Do not configure both surfaces for the same audit unless you intentionally need separate connections. Whichever path you use, verify the organization with `get_account_details` before any other account read.
 
 For a structure and performance audit without message-body inspection, use the most restrictive profile:
 
@@ -155,6 +165,8 @@ Use $klaviyo-agent-audit to identify the connected Klaviyo organization and list
 ```
 
 Confirm that the returned organization is the account you intend to audit.
+
+If the organization is wrong, stop and reconnect the surface that supplied the tool. A custom MCP shown by a CLI and an installed app/plugin shown in client settings can point to different accounts. If a newly authenticated connection is not visible, start a fresh task or session using the client's supported reload flow rather than assuming the saved configuration is active.
 
 ### 4. Run an audit
 
