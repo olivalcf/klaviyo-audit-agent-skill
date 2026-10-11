@@ -4,7 +4,9 @@
   },
   "scope": {
     "mode": "focused",
-    "focus_dimensions": ["data_measurement"],
+    "focus_dimensions": [
+      "data_measurement"
+    ],
     "start": "2026-07-01T00:00:00Z",
     "end": "2026-07-31T00:00:00Z",
     "timezone": "UTC"
@@ -22,6 +24,45 @@
       "confidence": "high",
       "impact": "Performance analysis has an authoritative outcome.",
       "action": "Keep the mapping documented and monitor continuity.",
+      "effort": "low"
+    },
+    {
+      "check_id": "data.event_continuity",
+      "dimension": "data_measurement",
+      "status": "unverifiable",
+      "points": 4,
+      "evidence": "Required evidence unavailable in fictional fixture.",
+      "source": "fixture capability gap",
+      "observed_at": "2026-08-01T12:00:00Z",
+      "confidence": "low",
+      "impact": "Cannot assess this control.",
+      "action": "Collect the required aggregate evidence.",
+      "effort": "low"
+    },
+    {
+      "check_id": "data.attribution_semantics",
+      "dimension": "data_measurement",
+      "status": "unverifiable",
+      "points": 3,
+      "evidence": "Required evidence unavailable in fictional fixture.",
+      "source": "fixture capability gap",
+      "observed_at": "2026-08-01T12:00:00Z",
+      "confidence": "low",
+      "impact": "Cannot assess this control.",
+      "action": "Collect the required aggregate evidence.",
+      "effort": "low"
+    },
+    {
+      "check_id": "data.tracking_integrations",
+      "dimension": "data_measurement",
+      "status": "unverifiable",
+      "points": 4,
+      "evidence": "Required evidence unavailable in fictional fixture.",
+      "source": "fixture capability gap",
+      "observed_at": "2026-08-01T12:00:00Z",
+      "confidence": "low",
+      "impact": "Cannot assess this control.",
+      "action": "Collect the required aggregate evidence.",
       "effort": "low"
     }
   ]

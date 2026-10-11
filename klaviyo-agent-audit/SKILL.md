@@ -133,6 +133,8 @@ Report two distinct measures:
 - **Audit coverage (0–100%):** rubric points supported by verifiable evidence.
 - **Evidence confidence (0–100%):** coverage adjusted for high, medium, or low evidence confidence.
 
+For focused audits, include every rubric check in each declared focus dimension, marking unavailable checks `unverifiable`. Report domain maturity rather than account maturity. The scorer validates scope completeness before calculating coverage; its denominator includes all points in the declared dimensions.
+
 Never hide low coverage behind a precise maturity score. If coverage is below 60%, label the audit directional rather than comprehensive.
 
 ## 6. Produce the report

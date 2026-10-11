@@ -105,6 +105,15 @@ if (audit.scope?.mode === 'focused') {
   if (!Array.isArray(audit.scope.focus_dimensions) || audit.scope.focus_dimensions.length === 0) {
     errors.push('focused audits require scope.focus_dimensions')
   } else {
+    const dimensions = new Set(Object.values(rubric).map(([dimension]) => dimension))
+    for (const dimension of audit.scope.focus_dimensions) {
+      if (!dimensions.has(dimension)) errors.push(`unknown focus dimension: ${dimension}`)
+    }
+    for (const [id, [dimension]] of Object.entries(rubric)) {
+      if (audit.scope.focus_dimensions.includes(dimension) && !ids.has(id)) {
+        errors.push(`missing rubric check for focused audit: ${id}`)
+      }
+    }
     for (const check of (audit.checks ?? [])) {
       if (!audit.scope.focus_dimensions.includes(check.dimension)) {
         errors.push(`${check.check_id}: dimension is outside scope.focus_dimensions`)

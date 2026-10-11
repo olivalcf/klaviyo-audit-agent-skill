@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import { readFile } from 'node:fs/promises'
+import { spawnSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 
 const path = process.argv[2]
 if (!path) {
@@ -8,6 +10,13 @@ if (!path) {
   process.exit(2)
 }
 
+const validation = spawnSync(process.execPath, [
+  fileURLToPath(new URL('./validate-audit.mjs', import.meta.url)), path,
+], { encoding: 'utf8' })
+if (validation.status !== 0) {
+  console.error(validation.stderr || validation.error?.message || 'Audit validation failed')
+  process.exit(validation.status || 1)
+}
 const audit = JSON.parse(await readFile(path, 'utf8'))
 const checks = audit.checks ?? []
 const statusScore = { pass: 1, partial: 0.5, fail: 0 }
@@ -53,7 +62,9 @@ const dimensions = Object.values(checks.reduce((groups, check) => {
 
 console.log(JSON.stringify({
   organization: audit.account?.organization,
-  account_maturity_score: maturity,
+  ...(audit.scope.mode === 'focused'
+    ? { domain_maturity_score: maturity, focus_dimensions: audit.scope.focus_dimensions }
+    : { account_maturity_score: maturity }),
   audit_coverage_percent: coverage,
   evidence_confidence_percent: evidenceConfidence,
   maturity_label: label,

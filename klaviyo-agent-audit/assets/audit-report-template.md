@@ -1,4 +1,4 @@
-# Klaviyo account audit — {{organization}}
+# Klaviyo {{account | focused domain}} audit — {{organization}}
 
 **Mode:** {{quick | full | focused}}  
 **Window:** {{start}} to {{end}} in {{timezone}}  
@@ -10,11 +10,13 @@
 
 | Measure | Result | Meaning |
 | --- | ---: | --- |
-| Account maturity | {{0–100}} | Normalized score across verifiable checks |
+| {{Account maturity for quick/full; Domain maturity for focused}} | {{0–100}} | Normalized score across verifiable checks within the declared scope |
 | Audit coverage | {{0–100%}} | Share of rubric supported by evidence |
 | Evidence confidence | {{0–100%}} | Coverage adjusted for evidence quality |
 
 **Key takeaway:** {{one sentence}}
+
+For focused audits, name the selected dimensions and include only their scorecard rows. Coverage includes every rubric check in those dimensions; missing evidence remains unverifiable. Do not describe a focused score as account maturity.
 
 ## Scorecard
 

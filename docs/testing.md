@@ -16,6 +16,9 @@ The repository test suite verifies:
 - the recommended OpenAI dependency is the official Klaviyo MCP in read-only mode;
 - a valid focused-audit fixture passes the validator;
 - scoring returns the expected maturity, coverage, and confidence values;
+- focused scopes require every check in their declared dimensions, including unavailable checks;
+- missing checks and unknown dimensions are rejected by both validation and direct scoring;
+- fully supported and entirely unverifiable focused scopes have correct coverage and domain labels;
 - personal-data field names are rejected by the validator.
 
 GitHub Actions runs the same suite on pushes and pull requests.
