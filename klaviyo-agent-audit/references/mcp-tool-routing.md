@@ -41,13 +41,13 @@ After installing or reauthorizing a connection, a fresh task or client session m
 
 ### Codex OAuth troubleshooting for filtered custom URLs
 
-If `codex mcp login` reports `Protected resource metadata resource mismatch` for a URL with query parameters, check the current status of [openai/codex#37387](https://github.com/openai/codex/issues/37387). While that issue remains applicable, authenticate with a one-time base-resource override while preserving the filtered, read-only URL in persistent configuration:
+If login or startup reports `Protected resource metadata resource mismatch` for a URL with query parameters, check the installed client version and current status of [openai/codex#37387](https://github.com/openai/codex/issues/37387). The report describes CLI 0.147.0; its follow-up also reports runtime startup failure after restoring a filtered URL. A successful login alone does not prove the audit connection will start.
 
-```bash
-codex mcp -c 'mcp_servers.<connector>.url="https://mcp.klaviyo.com"' login <connector>
-```
+Keep the configured read-only and content-filtering constraints. Do not silently remove query parameters or substitute the host root for the MCP endpoint. Klaviyo documents `https://mcp.klaviyo.com/mcp` as its remote endpoint; a protected resource identifier is determined by actual server metadata, not guessed from the hostname.
 
-This workaround addresses custom CLI MCP authentication only. It does not install, remove, or rebind a client app/plugin.
+Prefer a client version or supported connection path that can retain the required restrictions. If none is available, report the custom connection unavailable rather than weakening it. After any authorized connection change, verify runtime startup, inspect exposed capabilities, and confirm the returned organization before deeper reads. No audit can proceed from configuration readback or login success alone.
+
+This issue concerns custom CLI MCP connections. It does not install, remove, or rebind a client app/plugin; inspect that separate surface if it supplies the task's tools.
 
 ## Always forbidden during an audit
 
